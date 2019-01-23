@@ -4,9 +4,16 @@ const app = express()
 
 const SPACE_ID = process.env.SPACE_ID
 const TOKEN = process.env.TOKEN
+const ALLOW_HOSTS = process.env.ALLOW_HOSTS.split(',')
 
-app.use((_, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://asamac.netlify.com')
+app.use((req, res, next) => {
+  // 指定したホストのみ利用可能
+  const host = `${req.protocol}://${req.get('host')}`
+  if (!ALLOW_HOSTS.includes(host)) {
+    res.sendStatus(403)
+    return false
+  }
+  res.header('Access-Control-Allow-Origin', host)
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-Csrftoken, Content-Type, Accept, Authorization')
   res.header('Access-Control-Allow-Methods', 'GET')
   res.header('Access-Control-Max-Age', 3600)
