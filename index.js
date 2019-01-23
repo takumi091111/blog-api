@@ -8,7 +8,7 @@ const ALLOW_HOSTS = process.env.ALLOW_HOSTS.split(',')
 
 app.use((req, res, next) => {
   // 指定したホストのみ利用可能
-  const host = `${req.protocol}://${req.get('host')}`
+  const host = req.get('origin')
   if (!ALLOW_HOSTS.includes(host)) {
     res.sendStatus(403)
     return false
