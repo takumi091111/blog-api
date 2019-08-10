@@ -1,6 +1,4 @@
-/.vscode
 /node_modules
 now.json
-token.json
-allow_hosts.json
-*.lock
+.env
+

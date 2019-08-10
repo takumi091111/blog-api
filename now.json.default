@@ -1,0 +1,19 @@
+{
+  "name": "blog-api",
+  "version": 2,
+  "alias": ["ALIAS"],
+  "scope": "USER_NAME",
+  "env": {
+    "SPACE_ID": "SPACE_ID",
+    "TOKEN": "TOKEN",
+    "ALLOW_HOSTS": "https://asamac.netlify.com"
+  },
+  "builds": [
+    { "src": "/src/**/*.ts", "use": "@now/node@canary" }
+  ],
+  "routes": [
+    { "src": "/entries/list", "dest": "/src/routes/entries.ts" },
+    { "src": "/entries/(.*)", "dest": "/src/routes/entry.ts" }
+  ],
+  "public": false
+}
